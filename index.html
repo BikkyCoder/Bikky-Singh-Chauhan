@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #1a1a1a;
+      color: #d1d1d1;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    .slide-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-in-out forwards;
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-img {
+      border-radius: 50%;
+      border: 3px solid #4a4a4a;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.1);
+      border-color: #e0e0e0;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.5rem, 5vw, 1.8rem);
+      font-weight: 700;
+      color: #e0e0e0;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1rem, 2vw, 2rem);
+    }
+
+    .nav-links a {
+      font-family: 'Roboto', sans-serif;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      text-transform: uppercase;
+      color: #e0e0e0;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #a0a0a0;
+      bottom: -5px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #a0a0a0;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      color: #e0e0e0;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: rgba(26, 26, 26, 0.95);
+      padding: 1rem;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .mobile-menu a {
+      font-family: 'Roboto', sans-serif;
+      font-size: clamp(0.8rem, 2.5vw, 0.875rem);
+      text-transform: uppercase;
+      color: #e0e0e0;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: #a0a0a0;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .mobile-menu.active {
+        display: flex;
+      }
+
+      nav {
+        padding: 0.8rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080?text=Hero+Background');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      margin-top: 60px;
+      color: #e0e0e0;
+    }
+
+    .hero-content p {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: #a0a0a0;
+      margin-bottom: 2rem;
+    }
+
+    .hero-content .profile-img {
+      margin-top: 1rem;
+      width: clamp(100px, 25vw, 160px);
+      height: clamp(100px, 47vw, 300px);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 80vh;
+      }
+
+      .hero-content h1 {
+        margin-bottom: 0.8rem;
+      }
+
+      .hero-content p {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        height: 70vh;
+      }
+    }
+
+    /* General Section Styles */
+    section {
+      padding: clamp(3rem, 8vw, 6rem) 1rem;
+      background: linear-gradient(135deg, #1a1a1a, #252525);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 700;
+      color: #e0e0e0;
+      margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+      text-align: center;
+    }
+
+    h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 600;
+      color: #e0e0e0;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #a0a0a0;
+      margin-bottom: 1.5rem;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(1.5rem, 3vw, 2rem);
+      background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+      color: #e0e0e0;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .link {
+      color: #a0a0a0;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    .link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background: #e0e0e0;
+      bottom: -2px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+
+    .link:hover {
+      color: #e0e0e0;
+    }
+
+    .link:hover::after {
+      width: 100%;
+    }
+
+    /* Vision Section */
+    .vision {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    .vision .content,
+    .vision .image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .vision img {
+      width: 90%;
+      border-radius: 15px;
+      margin: auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .vision .profile-img {
+      margin-top: 1rem;
+      width: clamp(100px, 25vw, 120px);
+      height: clamp(100px, 47vw, 200px);
+    }
+
+    @media (max-width: 768px) {
+
+      .vision .content,
+      .vision .image {
+        flex: 1 1 100%;
+        min-width: 100%;
+        text-align: center;
+      }
+
+      .vision .profile-img {
+        margin: 1rem auto;
+      }
+    }
+
+    /* Services Section */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 40vw, 300px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    .service-card {
+      background: #252525;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Why Section */
+    .why {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    .why .content,
+    .why .image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .why img {
+      width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 768px) {
+
+      .why .content,
+      .why .image {
+        flex: 1 1 100%;
+        min-width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* Stats Section */
+    .stats {
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 25vw, 150px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    .stat h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #e0e0e0;
+    }
+
+    .stat p {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    }
+
+    /* Partners Section */
+    .partners-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    .partners .content {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .partners .logos {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      min-width: 300px;
+      flex-wrap: wrap;
+    }
+
+    .partners img {
+      height: clamp(2rem, 35vw, 19rem);
+      filter: grayscale(100%);
+      transition: all 0.3s ease;
+    }
+
+    .partners img:hover {
+      filter: grayscale(0%);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+
+      .partners .content,
+      .partners .logos {
+        flex: 1 1 100%;
+        min-width: 100%;
+        text-align: center;
+      }
+
+      .partners .logos {
+        justify-content: center;
+      }
+    }
+
+    /* Hobbies Section */
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 40vw, 300px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    .hobby-card {
+      background: #252525;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hobby-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Work Section */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 40vw, 300px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    .work-card {
+      background: #252525;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Careers Section */
+    .careers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 40vw, 300px), 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    /* Contact Section */
+    .social-box {
+      background: #252525;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: clamp(1rem, 3vw, 2rem);
+      flex-wrap: wrap;
+    }
+
+    .social-icons a {
+      color: #e0e0e0;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #a0a0a0;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 480px) {
+      .social-box {
+        padding: 1rem;
+      }
+    }
+
+    /* Footer */
+    footer {
+      padding: clamp(2rem, 6vw, 4rem) 1rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 30vw, 250px), 1fr));
+      gap: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    footer h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin-bottom: 1.5rem;
+    }
+
+    footer input {
+      width: 100%;
+      padding: clamp(0.6rem, 2vw, 0.8rem);
+      background: #252525;
+      color: #d1d1d1;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      transition: background 0.3s ease;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    footer input:focus {
+      background: #3a3a3a;
+      outline: none;
+    }
+
+    .footer-img {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .footer-img img {
+      width: clamp(100px, 25vw, 169px);
+      height: clamp(100px, 47vw, 300px);
+    }
+
+    footer .copyright {
+      text-align: center;
+      color: #a0a0a0;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo fade-in">ẞikky</div>
+      <div class="nav-links">
+        <a href="#home" class="fade-in">Home</a>
+        <a href="#about" class="fade-in">About</a>
+        <a href="#hobbies" class="fade-in">Hobbies</a>
+        <a href="#work" class="fade-in">Work</a>
+        <a href="#contact" class="fade-in">Contact</a>
+      </div>
+      <button class="menu-toggle">☰</button>
+    </nav>
+    <div class="mobile-menu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content fade-in">
+      <h1 class="slide-up">Hey, I’m Bikky 👋</h1>
+      <p class="slide-up">A Developer Who Loves to Build, Break & Rebuild.</p>
+      <img src="images/image_1.png" alt="Your Profile" class="profile-img slide-up" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section class="vision">
+    <div class="container">
+      <div class="content fade-in">
+        <h2 class="slide-up">Vision</h2>
+        <h3 class="slide-up">We’re Changing the Way the World Thinks About Portfolios</h3>
+        <p class="slide-up">
+          I’m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+          click me to
+          add your own content and make changes to the font. I’m a great place for you to tell a story and let your
+          users know a
+          little more about you.
+        </p>
+        <img src="images/image_1.png" alt="Your Profile" class="profile-img slide-up" loading="lazy">
+        <a href="#about" class="link slide-up">Read More →</a>
+      </div>
+      <div class="image fade-in">
+        <img src="images/image_1.png" alt="Vision" class="hover-scale" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="container">
+      <h2 class="fade-in slide-up">We Deliver Exceptional Products and Services Around the World</h2>
+      <div class="services-grid">
+        <div class="service-card fade-in slide-up">
+          <h3>Autonomous Driving</h3>
+          <p>
+            I’m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+            click me to
+            add your own content and make changes to the font.
+          </p>
+          <a href="#work" class="link">Read More →</a>
+        </div>
+        <div class="service-card fade-in slide-up">
+          <h3>Real-Time Information</h3>
+          <p>
+            I’m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+            click me to
+            add your own content and make changes to the font.
+          </p>
+          <a href="#work" class="link">Read More →</a>
+        </div>
+        <div class="service-card fade-in slide-up">
+          <h3>Perception Enabled</h3>
+          <p>
+            I’m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+            click me to
+            add your own content and make changes to the font.
+          </p>
+          <a href="#work" class="link">Read More →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Section -->
+  <section class="why">
+    <div class="container">
+      <div class="content fade-in">
+        <h2 class="slide-up">Why Choose Me</h2>
+        <h3 class="slide-up">A Different Approach to Showcasing Talent</h3>
+        <p class="slide-up">
+          I’m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+          click me to add
+          your own content and make changes to the font. I’m a great place for you to tell a story and let your users
+          know a little
+          more about you.
+        </p>
+        <a href="#about" class="link slide-up">Read More →</a>
+      </div>
+      <div class="image fade-in">
+        <img src="images/image_1.png" alt="Why Choose Me" class="hover-scale" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container">
+      <h2 class="fade-in slide-up">My Journey in Numbers</h2>
+      <div class="stats-grid">
+        <div class="stat fade-in slide-up">
+          <h3>200</h3>
+          <p>Projects</p>
+        </div>
+        <div class="stat fade-in slide-up">
+          <h3>3</h3>
+          <p>Years</p>
+        </div>
+        <div class="stat fade-in slide-up">
+          <h3>50</h3>
+          <p>Clients</p>
+        </div>
+        <div class="stat fade-in slide-up">
+          <h3>12</h3>
+          <p>Awards</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="fade-in slide-up">About Me</h2>
+      <div class="content fade-in slide-up">
+        <h3 class="slide-up">Who I Am</h3>
+        <p class="slide-up">
+          I’m a passionate individual with a love for creativity and innovation. With years of experience in my field, I
+          strive to create impactful solutions that make a difference. This portfolio showcases my journey, skills, and
+          achievements.
+        </p>
+        <p class="slide-up">
+          Feel free to explore my work and get to know me better. If you’d like to collaborate or learn more, don’t
+          hesitate to reach out!
+        </p>
+        <a href="#contact" class="btn slide-up">Get in Touch →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobbies Section -->
+  <section class="hobbies" id="hobbies">
+    <div class="container">
+      <h2 class="fade-in slide-up">My Hobbies</h2>
+      <div class="hobbies-grid">
+        <div class="hobby-card fade-in slide-up">
+          <h3>Photography</h3>
+          <p>
+            I love capturing moments through my lens. Whether it’s nature, portraits, or cityscapes, photography allows
+            me to express my creativity.
+          </p>
+        </div>
+        <div class="hobby-card fade-in slide-up">
+          <h3>Traveling</h3>
+          <p>
+            Exploring new places and cultures is my passion. Traveling inspires me and helps me gain new perspectives.
+          </p>
+        </div>
+        <div class="hobby-card fade-in slide-up">
+          <h3>Gaming</h3>
+          <p>
+            I enjoy unwinding with video games. From strategy to adventure, gaming is a great way for me to relax and
+            have fun.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Section -->
+  <section class="work" id="work">
+    <div class="container">
+      <h2 class="fade-in slide-up">My Work</h2>
+      <div class="work-grid">
+        <div class="work-card fade-in slide-up">
+          <h3>Project 1</h3>
+          <p>
+            A web application for a client that streamlined their business operations. Built using modern technologies
+            to ensure scalability.
+          </p>
+          <a href="#contact" class="link">Learn More →</a>
+        </div>
+        <div class="work-card fade-in slide-up">
+          <h3>Project 2</h3>
+          <p>
+            Designed a mobile app UI/UX for a startup, focusing on user experience and clean design principles.
+          </p>
+          <a href="#contact" class="link">Learn More →</a>
+        </div>
+        <div class="work-card fade-in slide-up">
+          <h3>Project 3</h3>
+          <p>
+            Developed an e-commerce platform with secure payment integration and a responsive design.
+          </p>
+          <a href="#contact" class="link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="partners">
+    <div class="container">
+      <h2 class="fade-in slide-up">My Collaborators</h2>
+      <div class="partners-grid">
+        <div class="content fade-in slide-up">
+          <p>
+            Click here to add your own content, or add a placeholder to tell a story about your partners. It’s a great
+            place to
+            share more about the companies you collaborate with. Just click “Edit Text” to get started.
+          </p>
+          <a href="#work" class="link">Read More →</a>
+        </div>
+        <div class="logos fade-in slide-up">
+          <img src="images/image_1.png" alt="Partner 1" class="hover-scale" loading="lazy">
+          <img src="images/image_1.png" alt="Partner 2" class="hover-scale" loading="lazy">
+          <img src="images/image_1.png" alt="Partner 3" class="hover-scale" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers Section -->
+  <section class="careers">
+    <div class="container">
+      <h2 class="fade-in slide-up">Opportunities</h2>
+      <div class="careers-grid">
+        <div class="fade-in slide-up">
+          <h3>We’re Looking for Innovative Talent</h3>
+          <p>
+            I’m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+            click me to
+            add your own content and make changes to the font.
+          </p>
+          <a href="#work" class="btn">Openings →</a>
+        </div>
+        <div class="fade-in slide-up">
+          <h3>Collaborate With Me</h3>
+          <p>
+            I’m a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+            click me to
+            add your own content and make changes to the font.
+          </p>
+          <a href="#contact" class="btn">Get in Touch →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="fade-in slide-up">Get in Touch</h2>
+      <div class="social-box fade-in slide-up">
+        <h3 class="slide-up">Follow Me on Social Media</h3>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/yourusername" target="_blank" class="fade-in slide-up"><i
+              class="fab fa-instagram"></i></a>
+          <a href="https://t.me/yourusername" target="_blank" class="fade-in slide-up"><i
+              class="fab fa-telegram-plane"></i></a>
+          <a href="https://x.com/yourusername" target="_blank" class="fade-in slide-up"><i
+              class="fab fa-x-twitter"></i></a>
+          <a href="https://www.youtube.com/yourusername" target="_blank" class="fade-in slide-up"><i
+              class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/yourusername" target="_blank" class="fade-in slide-up"><i
+              class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="fade-in slide-up">PORTFOLIO</h3>
+          <p class="fade-in slide-up">Tel: +123 456 7890</p>
+          <p class="fade-in slide-up">Email: info@myportfolio.com</p>
+          <p class="fade-in slide-up">123 Street Name, City, Country CA 94108</p>
+        </div>
+        <div>
+          <h3 class="fade-in slide-up">Menu</h3>
+          <a href="#work" class="link block fade-in slide-up">Technology</a>
+          <a href="#about" class="link block fade-in slide-up">About</a>
+          <a href="#work" class="link block fade-in slide-up">Careers</a>
+        </div>
+        <div>
+          <h3 class="fade-in slide-up">Subscribe</h3>
+          <p class="fade-in slide-up">Sign up to receive news and updates.</p>
+          <input type="email" placeholder="Email" class="fade-in slide-up">
+          <a href="#subscribe" class="btn fade-in slide-up">Subscribe</a>
+          <p style="font-size: clamp(0.8rem, 2vw, 0.9rem); margin-top: 1rem;" class="fade-in slide-up">Yes, please add
+            me to your newsletter!</p>
+        </div>
+      </div>
+      <div class="footer-img fade-in slide-up">
+        <img src="images/image_1.png" alt="Your Profile" class="profile-img" loading="lazy">
+      </div>
+      <div class="copyright fade-in">
+        © 2025 Portfolio. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      menuToggle.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Smooth scroll for links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Trigger animations on scroll
+    const elements = document.querySelectorAll('.fade-in, .slide-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    elements.forEach(element => {
+      element.style.animationPlayState = 'paused';
+      observer.observe(element);
+    });
+  </script>
+</body>
+
+</html>
